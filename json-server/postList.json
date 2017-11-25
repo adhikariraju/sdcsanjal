@@ -1,0 +1,53 @@
+{
+    "postList":[{
+          "name":"Akash GC",
+          "profilepic":"IMG3.JPG",
+          "postDetails":{
+             "Title":"Business Environment",
+             "createAt":"23hrs",
+             "Question":"When did nepal got member of WTO ?"
+             },
+          "comment":[{
+            "by":"",
+            "text":""
+          }]
+        },
+        {
+           "name":"Chandan Kumar",
+          "profilepic":"IMG1.JPG",
+          "postDetails":{
+             "Title":"Administrative Question",
+             "createAt":"April 24",
+             "Question":"When will our new session start?"
+             },
+            "comment":[{
+            "by":"",
+            "text":""
+          }]   
+        },
+        {
+           "name":"Ranjan Basnet",
+          "profilepic":"IMG2.JPG",
+          "postDetails":{
+             "Title":"Setting up development environment of PHP project",
+             "createAt":"12 min",
+             "Question":"I am not able to setup the development environment for the php project can anyone help me with this errorERROR in ./src/containers/App.jsx"
+             },
+            "comment":[{
+            "by":"",
+            "text":""
+          }]     
+        },
+        {
+          "name":"Pujan Maharjan",
+          "profilepic":"IMG6.JPG",
+          "postDetails":{
+             "Title":"Tour Query",
+             "createAt":"2 month ago",
+             "Question":"Guys when is the last day to collect fund for tour"
+             },
+            "comment":[{
+            "by":"",
+            "text":""
+          }]    
+        }]}

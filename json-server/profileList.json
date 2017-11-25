@@ -1,0 +1,27 @@
+{
+    "profile":[{
+        "_id":"1",
+        "name":"Raju Adhikari",
+        "profileImgDetails":"../assets/user/profileImg/1/8112017.jpg",
+        "semester":"",
+        "username":"adhikariraju5",
+        "password":"admin"
+    },
+    {
+        "_id":"2",
+        "name":"Yubaraj Khatiwada",
+        "profileImgDetails":"../assets/user/profileImg/2/8112017.jpg",
+        "semester":"",
+        "username":"yubraj5"
+    },
+    {
+        "_id":"3",
+        "name":"Sandesh Kafle",
+        "profileImgDetails":"",
+        "semester":"",
+        "username":"",
+        "password":""
+    }
+    ]
+     
+}
