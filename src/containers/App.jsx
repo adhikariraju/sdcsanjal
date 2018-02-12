@@ -2,13 +2,14 @@ import React, { PropTypes } from 'react';
 import Header from '../components/Header';
 import LeftDrawer from '../components/LeftDrawer';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
-import PublicPost from '../containers/PublicPostContainer.jsx'
+import Post from '../containers/PublicPostContainer.jsx'
 import NewPost from './PostContainer.jsx'
 import axios from 'axios'
 import {Router,Switch,Route,Redirect,Link} from 'react-router-dom'
 import Message from '../components/Message.jsx'
 import Conversation from '../components/Conversation.js'
 import Resource from '../components/Resource.js'
+import Friends from '../components/Friends.jsx'
 import {connect} from 'react-redux'
 //import ThemeDefault from '../theme-default';
 import Data from '../data';
@@ -79,7 +80,7 @@ class App extends React.Component {
       return(
         <div style={styles.container}>
           <NewPost userid={userId}/>
-          <PublicPost/>
+          <Post />
         </div>
       )
     }
@@ -103,6 +104,7 @@ class App extends React.Component {
                   
                   <Route exact path="/dashboard/resource" render={()=><Resource userDetail={this.props.userDetails} style={styles.container}/>}/>
 
+                  <Route exact path="/dashboard/friend" render={()=><Friends userDetail={this.props.userDetails} history={this.props.history} style={styles.container}/>} />
                  
                   {//<Route exact path="/dashboard/resource" render={()=><Resource history={this.props.history} userDetail={this.props.userDetail} style={styles.container}/>}/>
                   }

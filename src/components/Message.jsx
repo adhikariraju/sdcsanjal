@@ -25,78 +25,86 @@ const style={
   }
 }
 
-class Message extends Component{
-   constructor(props){
-      super(props);
-      this.state={messageList:[],
-                 convId:"",
-                 friendId:""}
-   this.submit=this.submit.bind(this);
-   }
-
-
-   submit(values){      
-      console.log("messaged",values);
-      console.log("this.convDetail",this.convDetail)
-      this.setState({messageList:this.state.messageList.concat({sender:this.props.userId,content:values.Message})})
-      this.socket.emit('message',{convId:this.convDetail._id,sender:this.props.userId,content:values.Message});  
-      values.Message='';
+  class Message extends Component{
+    constructor(props){
+        super(props);
+        this.state={messageList:[],
+                  convId:"",
+                  friendId:""}
+    this.submit=this.submit.bind(this);
     }
 
-    componentDidMount(){
-     let messageList=[];
-     if(Array.isArray(this.props.history.location.state.convDetail.messages)){
-        messageList=this.props.history.location.state.convDetail.messages;
-        this.setState({
+
+      submit(values){           
+        this.setState({messageList:this.state.messageList.concat({sender:this.props.userId,content:values.Message})})
+        this.socket.emit('message',{
+                            convId:this.convDetail._id||null,
+                            sender:this.props.userId,
+                            content:values.Message,
+                            convType:this.convDetail._id&&'old'||'new',
+                            domainId:this.props.userId,
+                            nextId:this.nextId
+                        });  
+        values.Message='';
+      }
+
+      componentDidMount(){
+        let messageList=[];
+        this.convDetail={};
+        
+        if(this.props.history.location.state.convDetail!==null){
+          messageList=this.props.history.location.state.convDetail.messages;
+          this.setState({
             messageList:[...messageList]
-        })          
-     }
-     this.convDetail={...this.props.history.location.state.convDetail};
-      console.log("inside message")
-      this.socket=socketIOClient("http://localhost:80");     
-      this.socket.on(this.convDetail._id,(data)=>{
-        this.setState({messageList:this.state.messageList.concat({sender:data.sender,content:data.content})})
-      })
-    }
+          })        
+          this.convDetail={...this.props.history.location.state.convDetail};
+        }
 
-    messageList(){
-      
-      return this.state.messageList.map((message,index)=>{
-        let blockStyle={backgroundColor:"#f2f2f2",float:"left"};
-         if(message.sender===this.props.userId){
-           blockStyle.backgroundColor=teal100;
-           blockStyle.float="right";           
-          }         
-        return <div style={{...blockStyle,...style.messageBlock}}>
-                <h3 style={{...style.messageText}}>               
-                  {message.content}
-                </h3>
-               </div>  
-      })
-    }
-  
-   render(){
-     console.log("state",this.state);
-     console.log("props",this.props)  
-     
-     const convId=this.props.history.location.state.convDetail._id;
-     const {handleSubmit}=this.props;
-       return(
-          <div style={{...this.props.style}} className="msg"> 
-          <div>
-            {this.messageList()}
-          </div>
-            <div className="createMsg" style={style.createMsg}>
-             <form onSubmit={handleSubmit(this.submit)}>
-                 
-                 <Field style={{width:'90%'}} type="text" name="Message" placeholder="Enter your message" fullWidth={true} component={Text}/>
-                 <RaisedButton label="Send" primary={true} type="submit"/>
-             </form>     
+        this.socket=socketIOClient("http://localhost:80");     
+        
+        if(this.convDetail!==null){
+          this.socket.on(this.convDetail._id,(data)=>{
+           this.setState({messageList:this.state.messageList.concat({sender:data.sender,content:data.content})})
+          })
+        }
+      }
+
+      messageList(){
+        if(Array.isArray(this.state.messageList)){
+          return this.state.messageList.map((message,index)=>{
+            let blockStyle={backgroundColor:"#f2f2f2",float:"left"};
+            if(message.sender===this.props.userId){
+              blockStyle.backgroundColor=teal100;
+              blockStyle.float="right";           
+              }         
+            return <div style={{...blockStyle,...style.messageBlock}}>
+                    <h3 style={{...style.messageText}}>               
+                      {message.content}
+                    </h3>
+                  </div>  
+          })
+        }
+      }
+    
+      render(){
+      const {handleSubmit}=this.props;
+      this.nextId=this.props.history.location.state.nextId||null;
+        return(
+            <div style={{...this.props.style}} className="msg"> 
+            <div>
+              {this.messageList()}
             </div>
-          </div>
-        )
-   }
-}
+              <div className="createMsg" style={style.createMsg}>
+                <form onSubmit={handleSubmit(this.submit)}>
+                    <Field style={{width:'90%'}} type="text" name="Message" placeholder="Enter your message" fullWidth={true} component={Text}/>
+                    <RaisedButton label="Send" primary={true} type="submit"/>
+                </form>
+              </div>
+            </div>
+          )
+      }
+  }
+
 export default reduxForm({
   form:'message'
 })(Message);

@@ -17,8 +17,7 @@ export default class Main extends Component{
     return(
             <div>
                 <AppBar
-                iconElementLeft={<img src={image} />}  
-                        
+                iconElementLeft={<img src={image} />}                          
                 />
                 <Switch>
                    <Route  path="/register" component={Register}/>

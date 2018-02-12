@@ -117,11 +117,10 @@ class Register extends Component{
                         </Field>
                      </div>
                     <RaisedButton label="Register" style={commonMargin} primary={true} type="submit"/>                  
-                 </form>
+                </form>
               </Paper>  
               </div>
-              {this.dialogOpen&&<DialogBox dialog={this.dialog}/>}
-               
+                {this.dialogOpen&&<DialogBox dialog={this.dialog}/>}               
               </div>
         )
     }

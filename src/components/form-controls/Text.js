@@ -2,13 +2,15 @@ import TextField from  'material-ui/TextField'
 import React from 'react';
 import {teal400} from 'material-ui/styles/colors';
 
+
  const Text=({
     input,
     label,
     meta:{touched,error},
     ...custom
-})=>
-  <TextField
+})=>{
+  console.log("input",input)
+  return (<TextField
    floatingLabelFixed={label}
    floatingLabelText={label}
    floatingLabelStyle={{fontSize:"22px",fontWeight:"bold",color:teal400}}
@@ -18,5 +20,6 @@ import {teal400} from 'material-ui/styles/colors';
    errorText={touched && error}
    {...input}
    {...custom}
-   />
+   >
+   </TextField>)}
 export default Text;

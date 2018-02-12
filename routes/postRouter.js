@@ -9,14 +9,15 @@ var ObjectId = require('mongodb').ObjectId;
             let docs=[];
             db.collection('post')
               .aggregate([
-                  {
+                 {$sort:{createdAt:-1}},
+                   {
                     $lookup:{
                         from:"user",
                         localField:"userid",
                         foreignField:"_id",
                         as:"userDetail"
                     }
-              }],function(err,result){
+                }],function(err,result){
                   console.log("result",result);
                   res.send(result) 
               })    
@@ -29,7 +30,7 @@ var ObjectId = require('mongodb').ObjectId;
 
     .post(function(req,res){
         console.log(req.body.Title);
-        let comment='';
+        let comment=[];
         if(req.body.comment)
         comment=req.body.comment;
         let post={

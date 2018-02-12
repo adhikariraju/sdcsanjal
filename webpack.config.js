@@ -1,10 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, 'public'),
+    publicPath:"/",
     filename: 'bundle.js'
   },
   resolve: {
@@ -19,13 +19,18 @@ module.exports = {
         presets: ['es2015', 'react',  "env"]
       }
      },
-      {
-         test: /\.(png|jpg|svg)$/i, loader: "file-loader",
-        options: {
-         emitFile: false
-        }
-      },
-      { test:/\.json?$/,loader:'json-loader' }
+      { test: /\.(png|jpg|svg|css)$/i, loader: "file-loader"},
+      { test:/\.json?$/,loader:'json-loader' },
+      {test:/\.css$/,
+         use:[{
+          loader: "css-loader",
+          options: {
+            alias: {
+              quillcss: path.resolve('./node_modules/react-quill/dist')
+            }
+          }
+        }]
+      }
   
     ],
    

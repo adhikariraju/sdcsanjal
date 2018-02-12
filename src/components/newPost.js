@@ -6,19 +6,20 @@ import {validate} from "../validation/postValidation"
 import MenuItem from 'material-ui/MenuItem'
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton' 
+import Quill from './form-controls/Quill'
 // import {SelectField} from 'redux-form-material-ui'
 
 export class NewPost extends Component{
 
 handleFormSubmit(values){
-// console.log("values",values)
+console.log("values",values)
 
 let data={
   "userid":this.props.userid
-}
-let formData={...values,...data}
-console.log("this.post",formData)
- this.props.submitPost(formData);
+};
+  let formData={...values,...data}
+  console.log("this.post",formData)
+  this.props.submitPost(formData);
 }
 
   render(){
@@ -32,6 +33,7 @@ console.log("this.post",formData)
           paddingLeft:30,
           paddingRight:50
        };
+        
 
        const buttonStyle={
          marginTop:'30'
@@ -52,29 +54,25 @@ console.log("this.post",formData)
                   />
                </div>
                <div>
-                 <Field 
-                  name="Question"
-                  label="Question"
-                  multiLine={true}
-                  rows={4}
-                  component={Text}
-                  fullWidth={true}
-                  placeholder="Enter your question here"
-                  />
-               </div> 
+                 <Field name="Question"
+                   placeholder="Post your question"
+                   component={Quill}
+                   style={{height:"140px"}}
+                 />
+                   </div> 
                <div>
-                 <Field name="Tags"
-                  label="Select Tags"
-                  component={MultiSelect}>
-                  <MenuItem value="sem1" primaryText="1st Sem"/>
-                  <MenuItem value="sem2" primaryText="2nd Sem"/>
-                  <MenuItem value="sem3" primaryText="3rd Sem"/>
-                  <MenuItem value="sem4" primaryText="4th Sem"/>
-                  <MenuItem value="sem5" primaryText="5th Sem"/>
-                  <MenuItem value="sem6" primaryText="6th Sem"/>
-                  <MenuItem value="sem7" primaryText="7th Sem"/>
-                  <MenuItem value="sem8" primaryText="8th Sem"/>    
-                </Field>   
+                  <Field name="Tags"
+                    label="Select Tags"
+                    component={MultiSelect}>
+                    <MenuItem value="sem1" primaryText="1st Sem"/>
+                    <MenuItem value="sem2" primaryText="2nd Sem"/>
+                    <MenuItem value="sem3" primaryText="3rd Sem"/>
+                    <MenuItem value="sem4" primaryText="4th Sem"/>
+                    <MenuItem value="sem5" primaryText="5th Sem"/>
+                    <MenuItem value="sem6" primaryText="6th Sem"/>
+                    <MenuItem value="sem7" primaryText="7th Sem"/>
+                    <MenuItem value="sem8" primaryText="8th Sem"/>    
+                  </Field>   
                   
                </div> 
       

@@ -3,30 +3,19 @@ var userListRouter=express.Router();
 var connectdb = require('../db.js');
 var ObjectId=require('mongodb').ObjectId;
 
-module.exports=userListRouter.post('/',function(req,res){
+module.exports=userListRouter.get('/',function(req,res){
     connectdb(function(db){
-    db.collection('account')
-        .find({},function(err,docs){
+    db.collection('user')
+        .find({}).toArray(function(err,docs){
+                if(err)throw err;
                 if(docs!=0){
                     console.log("entered docs")
                     console.log(docs);
-                    newUser={
-                    username:docs.ops[0].username, 
-                    userId:ObjectId(docs.ops[0]._id)                   
-                    }
-                    res.json(
-                    {
-                        isValidInput:true,
-                        id:docs.ops[0]._id
-                    }
-                    );
-                    registerSuccess=true;
+                    res.send({userList:docs});
                 }
 
                 else{
-                    res.json({
-                    isValidInput:false                
-                    });
+                    res.send({userList:null});
                 }
             })
             db.close();

@@ -6,14 +6,20 @@ import MenuItem from 'material-ui/MenuItem';
 import {Link} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 import image from '../assets/ssanjallogo.png'
+import RaisedButton from 'material-ui/RaisedButton'
+import AddImg from 'material-ui/svg-icons/Image/add-a-photo'
 
 const LeftDrawer = (props) => {
+
+  
+
+
   let { navDrawerOpen } = props;
   let profilePic='';
+  
   if(props.profileDetails){
    profilePic=require(`../appMediaFiles/userProfilePics/${props.profileDetails}`);
   }
-  console.log("profilepic",profilePic)
   const styles = {
     logo: {
       cursor: 'pointer',
@@ -68,8 +74,10 @@ const LeftDrawer = (props) => {
         <div style={styles.avatar.div}>
           <Avatar size={50}
                   src={profilePic}
-                  style={styles.avatar.icon}/>
+                  style={styles.avatar.icon}
+                 />
           <span style={styles.avatar.span}>{props.username}</span>
+          <AddImg color={white} style={{cursor:"pointer"}}/>
         </div>
         <div>
           {props.menus.map((menu, index) =>

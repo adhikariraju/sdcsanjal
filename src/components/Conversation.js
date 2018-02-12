@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Card,CardHeader,CardText,CardActions} from 'material-ui/Card'
 import {Link} from 'react-router-dom'
 import {FlatButton} from 'material-ui/FlatButton'
+import Friends from './Friends.jsx'
 
 const style={
   createMsg:{
@@ -19,11 +20,10 @@ class Conversation extends Component{
       }
    }
    
-   conversationList(){
-     
+   conversationList(){     
       return this.state.conversation.map((conv,index)=>{
         let image=require(`../appMediaFiles/userProfilePics/${conv.friend[0].profile_pic}`);
-          return <Card key={index} style={{hover:"pointer"}} 
+          return <Card key={index} style={{cursor:"pointer"}} 
                        onClick={()=>this.props.history.push("/dashboard/message",{convDetail:conv})}>
                     <CardHeader
                       title={conv.friend[0].name}
@@ -32,8 +32,7 @@ class Conversation extends Component{
                     </CardHeader>
                     <CardText>
                       {conv.recentChat}
-                    </CardText>  
-                    
+                    </CardText>                   
                  </Card> 
       })
    }
@@ -53,6 +52,10 @@ class Conversation extends Component{
        return(
           <div style={{...this.props.style}} className="convList" > 
             {this.conversationList()}
+            <div style={{float:"left"}}>
+               {//<UserList/>
+              }
+            </div>
           </div>
         )
    }

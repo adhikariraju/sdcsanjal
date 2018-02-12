@@ -1,11 +1,12 @@
 import React,{Component} from 'react'
 import {Card,CardHeader,CardMedia,CardTitle,CardText,CardActions} from 'material-ui/Card'
+import {teal400,teal200,grey100} from 'material-ui/styles/colors';
 import postDetails from '../../json-server/postList.json'
 import FontIcon from 'material-ui/FontIcon';
 import Comment from './Comment'
 import Like from 'material-ui/svg-icons/action/thumb-up'
 
-class PublicPost extends Component{
+class Post extends Component{
     constructor(props){
       super(props);
       this.postList=this.postList.bind(this);
@@ -29,25 +30,25 @@ class PublicPost extends Component{
        if(this.state.postDetails){
        return this.state.postDetails.map((post,i)=>{           
         let image=require(`../appMediaFiles/userProfilePics/${post.userDetail[0].profile_pic}`);
-        console.log("post image",image)
+        console.log("post image",image);
+        let realpost=post.post.replace('img','img style="max-width:100%;max-height:100%"')
          return(
             <Card style={{margin:'10px'}}>
                 <CardHeader title={<a>{post.userDetail[0].name}</a>} 
-                    subtitle={post.createAt} avatar={image}>
+                    subtitle={post.createAt} 
+                    avatar={image}>
                 </CardHeader>
-                    <hr style={{lineWidth:'0.5px #ffffff'}}/>
-                <CardTitle>
+                    <hr style={{lineWidth:'0.1px #ffffff'}}/>
+                <CardTitle style={{color:"black"}}>
                     {post.title}
                 </CardTitle>
-                <CardText>
-                    {post.post}
-                </CardText>
+                <CardText style={{backgroundColor:grey100,margin:"15px 20px 15px 20px",borderRadius:"5px"}} 
+                 dangerouslySetInnerHTML={{__html:realpost}}/>
+                    
                 <CardActions>
                    { // <Like/>
                    }
-                    <Comment/>
-                       
-                    
+                    <Comment {...this.props.userDetails} comments={post.comment} postId={post._id}/>                   
                 </CardActions>
            </Card>)
         })
@@ -65,4 +66,4 @@ class PublicPost extends Component{
 
 }
 
-export default PublicPost;
+export default Post;

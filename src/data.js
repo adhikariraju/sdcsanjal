@@ -12,7 +12,7 @@ const data = {
   menus: [
     { text: 'Resource', icon: <Assessment/>, link: '/dashboard/resource' },
     { text: 'Notice', icon: <Web/>, link: '/form' },
-    { text: 'Friends', icon: <GridOn/>, link: '/table' },
+    { text: 'Friends', icon: <GridOn/>, link: '/dashboard/friend' },
     { text: 'Post', icon: <PermIdentity/>, link: '/login' }
   ],
   tablePage: {

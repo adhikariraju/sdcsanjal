@@ -15,7 +15,7 @@ export const getUserList=(data)=>{
 }
 }
 
-export const lgetUserListSuccess=(result)=>{
+export const getUserListSuccess=(result)=>{
     return{
         type:'GET_USERS_SUCCESS',
         result

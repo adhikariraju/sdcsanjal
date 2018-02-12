@@ -11,10 +11,12 @@ export default class ResourceList extends Component{
    }
 
    download(file){
-     axios.post('http://localhost:3000/download',file)
-     .then(result=>{
-
-     })  
+    //  axios.get('http://localhost:3000/download/'+file)
+    //  .then(result=>{
+    //      console.log("result",result);
+    //     window.open(result.data);
+    //  })  
+    window.open('http://localhost:3000/download/'+file);
    }
 
    resourceList(){
